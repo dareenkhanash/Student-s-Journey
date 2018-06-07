@@ -1,0 +1,41 @@
+
+/**
+ * Defines a data model for a School network
+ */
+namespace org.schoolsnetwork
+
+
+enum StudentStatus {
+  o Graduated
+  o Enrolled
+}
+
+asset Students identified by StudentId {
+  o String StudentId
+  o String FullName
+  o String Birthday
+  o String Grade
+  o Double GPA
+  o StudentStatus Status
+  --> School CurrentSchool optional
+  --> University currentUniversity optional
+}
+
+participant School identified by Name {
+  o String Name
+  o String Email
+  o Integer PhoneNumber
+  o String Adress
+}
+
+participant University identified by universityName {
+  o String universityName
+  o String Email
+  o String Adress
+}
+
+transaction TransStudents {
+  --> Students student
+  --> School NewSchool optional
+  --> University newUniversity optional
+}

@@ -1,0 +1,118 @@
+<div class="modal fade" id="addTransactionModal" tabindex="-1" role="dialog" aria-labelledby="addTransactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="addTransactionModalLabel">Create Transaction</h4>
+        <p class="modal-intro">Enter the required values below.</p>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+          <div class="form-group text-left">
+            <label for="student">Student ID</label>
+            <textarea formControlName="student" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group text-left">
+            <label for="NewSchool">New School</label>
+            <textarea formControlName="NewSchool" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group text-left">
+              <label for="newUniversity">New University</label>
+              <textarea formControlName="newUniversity" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button (click)="addTransaction(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<div class="container">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    <strong>Error:</strong> {{errorMessage}}
+  </div>
+  <div class="row">
+    <div class="col-md-4">  
+    </div>
+    <div class="col-md-5 marg">
+      <label for="student" >Student ID  </label>
+        <input id="studentName"   type="number" step='any'  (keyup)="onKey($event)">
+        <button (click)="loadStudentTransaction()" type="button" class="btn btn-primary">
+          Choose Student
+        </button>
+    </div>
+  
+  <div class="col-md-3">
+    <button (click)="loadAll()" type="button" class="btn btn-primary btn-Student">
+    
+     Get All Transfers
+    </button>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <h1 class="transaction-title" id='transactionName'>Student's journey</h1>
+    </div>
+    <div class="col-md-3">
+      <button (click)="resetForm()" type="button" class="btn btn-primary btn-Student" data-toggle="modal" data-target="#addTransactionModal">
+        <span style="font-size: 14px;font-family: inherit;border-right:1px solid rgba(255,255,255,0.5);padding-right:0.6em;margin-right:0.5em;vertical-align:middle;">
+          <svg class="plus-svg" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+            <path fill-rule="evenodd" d="M5.5,4.5 L9.5,4.5 L10,4.5 L10,5.5 L9.5,5.5 L5.5,5.5 L5.5,9.5 L5.5,10 L4.5,10 L4.5,9.5 L4.5,5.5 L0.5,5.5 L0,5.5 L0,4.5 L0.5,4.5 L4.5,4.5 L4.5,0.5 L4.5,0 L5.5,0 L5.5,0.5 L5.5,4.5 Z"
+            />
+          </svg>
+        </span>
+        Transfer Student
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+
+
+            <th class="info" style="color:rgb(79, 79, 138)">Student ID</th> 
+            <th class="info" style="color:rgb(79, 79, 138)">Student Name</th>
+            <th class="info" style="color:rgb(79, 79, 138)">School Name</th>
+            <th class="info" style="color:rgb(79, 79, 138)">Transaction ID</th>
+            <th class="info" style="color:rgb(79, 79, 138)">Timestamp</th>
+
+          </tr>
+        </thead>
+        <tbody class="well">
+          <tr *ngFor="let transaction of allTransactions">
+
+
+            <td class="transaction-properties">{{transaction.student ? transaction.student.slice(37) : transaction.student}}</td>
+            <td class="transaction-properties">{{transaction.name}}</td>
+            <td class="transaction-properties">{{transaction.NewSchool ? transaction.NewSchool.slice(35) : transaction.newUniversity.slice(39)}}</td>
+            <td class="transaction-properties">{{transaction.transactionId}}</td>
+            <td class="transaction-properties">{{transaction.timestamp | date:'short'}}</td>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

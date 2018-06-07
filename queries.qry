@@ -1,0 +1,8 @@
+/** query to choose transaction for specific student
+*/
+query selectTransferByStudent {
+  description: "Select all transfers for a student"
+  statement:
+      SELECT org.schoolsnetwork.TransStudents
+          WHERE (student == _$student) ORDER BY [timestamp ASC]
+}
